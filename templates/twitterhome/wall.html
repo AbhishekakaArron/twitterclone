@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <form class="form-signin" method="POST">
+        {% csrf_token %}
+        <h1 class="h3 mb-3 font-weight-normal">Hi {{request.user}} , post something</h1>
+        <div class="form-group">
+            <textarea class="form-control" placeholder="create a post:" rows="5" name="tweet" id="comment"></textarea>
+          </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Post</button>
+    </form>
+</div>
+{% endblock content %}
