@@ -9,9 +9,11 @@ from tweet.models import Tweet
 def follow_user(request, name):
     user= request.user
     followee = User.objects.get(username=name)
-    follow = Follower( user=user,following= followee)
-    follow.save()
-    followers_feed(request)
+    if followee:
+        follow = Follower( user=user,following= followee)
+        follow.save()
+    else:
+        return render(request, 'errors/400.html')
     return render(request, 'user/follow.html')
 
 
@@ -19,6 +21,9 @@ def follow_user(request, name):
 def followers_feed(request):
     user = request.user
     followers = Follower.objects.filter(user=user).distinct().values_list('following',flat=True)
-    tweets = Tweet.objects.filter(author_id__in=followers).order_by('-created_at')
-    context  = {'tweets': tweets}
-    return render(request, 'user/followersfeed.html', context)
+    if followers:
+        tweets = Tweet.objects.filter(author_id__in=followers).order_by('-created_at')
+        context  = {'tweets': tweets}
+        return render(request, 'user/followersfeed.html', context)
+    else:
+        return render(request, 'errors/400.html')
