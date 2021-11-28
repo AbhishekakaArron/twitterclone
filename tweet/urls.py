@@ -1,10 +1,10 @@
 from django.urls import path
-from .views import posttweet,my_tweets
+from .views import posttweet,my_tweets,get_all_tweets,profileview,user_profile_view
 
 
 urlpatterns = [
-    # path('',views.index, name='home'),
-    # path('post', posttweet, name='tweet'),
-    # path('wall' , posttweet , name ='wall'),
-    # path('profile', my_tweets, name='my_tweets'),
+    path(r'^globalfeed/', get_all_tweets, name='globalfeed'),
+    # path('my_tweets', my_tweets,name="my_tweets"),
+    # path('wall' , posttweet),
+    # path('profile/<str:name>/', profileview),
 ]
