@@ -24,12 +24,12 @@ from followers.views import follow_user
 
 urlpatterns = [
     path('', my_tweets),
-    # path('globalfeed/', get_all_tweets),
+    path('globalfeed/', get_all_tweets),
     path('login', loginUser),
     path('logout/', logoutUser),
     path('register', registerUser),
     path('admin/', admin.site.urls),
-    path(r'^twitter/', include('tweet.urls')),
+    # path(r'^twitter/', include('tweet.urls')),
     path('my_tweets', my_tweets),
     path('wall' , posttweet),
     path('profile/<str:name>/', profileview),
